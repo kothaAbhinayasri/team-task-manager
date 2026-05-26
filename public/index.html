@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Team Task Manager</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main id="authView" class="auth-shell">
+      <section class="auth-panel">
+        <div>
+          <p class="eyebrow">Collaborative workspace</p>
+          <h1>Team Task Manager</h1>
+          <p class="muted">Create projects, assign tasks, and keep delivery moving with clear ownership.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Authentication mode">
+          <button id="showLogin" class="tab active" type="button">Login</button>
+          <button id="showSignup" class="tab" type="button">Signup</button>
+        </div>
+
+        <form id="loginForm" class="form">
+          <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+          <label>Password<input name="password" type="password" required autocomplete="current-password" /></label>
+          <button class="primary" type="submit">Login</button>
+        </form>
+
+        <form id="signupForm" class="form hidden">
+          <label>Name<input name="name" required autocomplete="name" minlength="2" /></label>
+          <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+          <label>Password<input name="password" type="password" required minlength="8" autocomplete="new-password" /></label>
+          <button class="primary" type="submit">Create account</button>
+        </form>
+
+        <p id="authMessage" class="message"></p>
+      </section>
+    </main>
+
+    <main id="appView" class="app hidden">
+      <aside class="sidebar">
+        <div>
+          <p class="eyebrow">Workspace</p>
+          <h2>Projects</h2>
+        </div>
+        <button id="newProjectButton" class="primary" type="button">New project</button>
+        <nav id="projectList" class="project-list" aria-label="Project list"></nav>
+        <div class="account">
+          <span id="currentUser"></span>
+          <button id="logoutButton" class="ghost" type="button">Logout</button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <header class="topbar">
+          <div>
+            <p id="projectRole" class="eyebrow">Select a project</p>
+            <h1 id="projectTitle">Team dashboard</h1>
+            <p id="projectDescription" class="muted">Your task metrics and assignments appear here.</p>
+          </div>
+          <button id="refreshButton" class="ghost" type="button">Refresh</button>
+        </header>
+
+        <section class="stats-grid" aria-label="Task statistics">
+          <article class="stat"><span>Total tasks</span><strong id="statTotal">0</strong></article>
+          <article class="stat"><span>To Do</span><strong id="statTodo">0</strong></article>
+          <article class="stat"><span>In Progress</span><strong id="statProgress">0</strong></article>
+          <article class="stat danger"><span>Overdue</span><strong id="statOverdue">0</strong></article>
+        </section>
+
+        <section class="workspace-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Tasks</h2>
+              <button id="newTaskButton" class="primary small" type="button">Add task</button>
+            </div>
+            <div id="taskBoard" class="task-board"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Members</h2>
+              <button id="addMemberButton" class="ghost small" type="button">Add</button>
+            </div>
+            <div id="memberList" class="member-list"></div>
+            <h3>Tasks per user</h3>
+            <div id="tasksPerUser" class="bars"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="projectDialog">
+      <form id="projectForm" method="dialog" class="form">
+        <h2>New project</h2>
+        <label>Name<input name="name" required minlength="2" /></label>
+        <label>Description<textarea name="description" rows="3"></textarea></label>
+        <div class="actions">
+          <button class="ghost" value="cancel" type="button" data-close>Cancel</button>
+          <button class="primary" type="submit">Create</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="memberDialog">
+      <form id="memberForm" method="dialog" class="form">
+        <h2>Add member</h2>
+        <label>Email<input name="email" type="email" required /></label>
+        <label>Role<select name="role"><option>Member</option><option>Admin</option></select></label>
+        <div class="actions">
+          <button class="ghost" value="cancel" type="button" data-close>Cancel</button>
+          <button class="primary" type="submit">Add member</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="taskDialog">
+      <form id="taskForm" method="dialog" class="form">
+        <h2>Task</h2>
+        <input name="taskId" type="hidden" />
+        <label>Title<input name="title" required minlength="2" /></label>
+        <label>Description<textarea name="description" rows="3"></textarea></label>
+        <div class="two-col">
+          <label>Due date<input name="dueDate" type="date" required /></label>
+          <label>Priority<select name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        </div>
+        <div class="two-col">
+          <label>Status<select name="status"><option>To Do</option><option>In Progress</option><option>Done</option></select></label>
+          <label>Assignee<select name="assigneeId" required></select></label>
+        </div>
+        <div class="actions">
+          <button class="ghost" value="cancel" type="button" data-close>Cancel</button>
+          <button class="primary" type="submit">Save task</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast hidden" role="status"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
