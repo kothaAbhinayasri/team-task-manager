@@ -112,20 +112,9 @@ Authorization: Bearer <token>
 - View project tasks
 - Update status only for tasks assigned to them
 
-## Demo Video Checklist
-
-For a 2-5 minute demo, show:
-
-1. Signup and login.
-2. Create a project.
-3. Create a second user and add them to the project.
-4. Create and assign tasks with due date and priority.
-5. Show dashboard metrics updating.
-6. Login as the member and update only assigned task status.
-7. Mention Railway deployment and environment variables.
 
 ## Submission
 
-- Live application URL: add your Railway URL here
-- GitHub repository: add your repository URL here
-- Demo video: add your video URL here
+- Live application URL: https://team-task-manager-production-c6eb.up.railway.app
+- GitHub repository: https://github.com/kothaAbhinayasri/team-task-manager
+- Demo video: 
