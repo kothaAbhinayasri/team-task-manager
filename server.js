@@ -18,6 +18,32 @@ function ensureDatabase() {
   }
 }
 
+function seedAdminFromEnv() {
+  const email = (process.env.ADMIN_EMAIL || "").trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD || "";
+  if (!email || !password) return;
+  if (password.length < 8) {
+    console.warn("ADMIN_PASSWORD must be at least 8 characters; admin seed skipped.");
+    return;
+  }
+
+  const db = readDb();
+  const existing = db.users.find((user) => user.email === email);
+  if (existing) {
+    existing.passwordHash = hashPassword(password);
+  } else {
+    db.users.push({
+      id: id("usr"),
+      name: process.env.ADMIN_NAME || "Admin",
+      email,
+      passwordHash: hashPassword(password),
+      createdAt: now()
+    });
+  }
+  writeDb(db);
+  console.log(`Admin credentials seeded for ${email}`);
+}
+
 function readDb() {
   ensureDatabase();
   return JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
@@ -393,5 +419,6 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   ensureDatabase();
+  seedAdminFromEnv();
   console.log(`Team Task Manager running on http://localhost:${PORT}`);
 });
