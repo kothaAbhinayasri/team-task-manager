@@ -10,7 +10,6 @@ This project was developed as part of a full-stack coding assignment and is insp
 
 - Live Application: https://team-task-manager-production-c6eb.up.railway.app
 - GitHub Repository: https://github.com/kothaAbhinayasri/team-task-manager
-- Demo Video: Add your demo video link here
 
 ## Project Highlights
 
@@ -260,7 +259,6 @@ A 2-5 minute demo can cover:
 - Project: Team Task Manager
 - Live Application: https://team-task-manager-production-c6eb.up.railway.app
 - GitHub Repository: https://github.com/kothaAbhinayasri/team-task-manager
-- Demo Video: Add your demo video link here
 
 ## Conclusion
 
